@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metode Pembayaran - OpenTrip Explore</title>
+    <meta name="description" content="Informasi lengkap nomor rekening dan E-Wallet untuk pembayaran DP atau pelunasan Open Trip Explore. Tersedia BCA, BRI, OCBC, DANA, OVO, dan ShopeePay.">
+    <meta name="keywords" content="metode pembayaran, transfer bank, rekening BCA, E-Wallet, Dana, OVO, ShopeePay">
+
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Gaya tambahan dari style.css dimuat, tidak perlu diulang */
+    </style>
+</head>
+<body>
+    
+    <header>
+        <div class="container">
+            <nav>
+                <ul>
+                    <li><a href="index.html">OPEN TRIP EXPLORE</a></li>
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="pembayaran.html">Metode Pembayaran</a></li>
+                    <li><a href="kontak.html">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <div class="container">
+                <h1 class="section-title">Metode Pembayaran</h1>
+                
+                <p style="text-align: center; max-width: 700px; margin: 0 auto 50px; color: var(--light-text-color);">
+                    Kami menyediakan berbagai metode pembayaran yang mudah dan aman. Salin nomor rekening atau e-wallet yang Anda pilih.
+                </p>
+
+                <div class="payment-container">
+
+                    <div class="payment-card">
+                        <i class="fas fa-university fa-4x" style="color:#00407d;"></i>
+                        <h3>Transfer Bank BCA</h3>
+                        <div class="account-details">
+                            <span id="rekening_bca">1234567890</span>
+                            <button class="copy-button" onclick="copyToClipboard('rekening_bca', this)">Salin</button>
+                        </div>
+                        <p style="font-weight: bold;">a.n PT Open Trip Explore</p>
+                    </div>
+                    
+                    <div class="payment-card">
+                        <i class="fas fa-university fa-4x" style="color:#01539e;"></i>
+                        <h3>Transfer Bank BRI</h3>
+                        <div class="account-details">
+                            <span id="rekening_bri">9876543210</span>
+                            <button class="copy-button" onclick="copyToClipboard('rekening_bri', this)">Salin</button>
+                        </div>
+                        <p style="font-weight: bold;">a.n PT Open Trip Explore</p>
+                    </div>
+
+                    <div class="payment-card">
+                        <i class="fas fa-university fa-4x" style="color:#e2001a;"></i>
+                        <h3>Transfer Bank OCBC</h3>
+                        <div class="account-details">
+                            <span id="rekening_ocbc">1122334455</span>
+                            <button class="copy-button" onclick="copyToClipboard('rekening_ocbc', this)">Salin</button>
+                        </div>
+                        <p style="font-weight: bold;">a.n PT Open Trip Explore</p>
+                    </div>
+
+                    <div class="payment-card">
+                        <i class="fas fa-wallet fa-4x" style="color:#1da7f2;"></i>
+                        <h3>E-Wallet DANA</h3>
+                        <div class="account-details">
+                            <span id="dana_hp">081385285889</span>
+                            <button class="copy-button" onclick="copyToClipboard('dana_hp', this)">Salin</button>
+                        </div>
+                        <p style="font-weight: bold;">a.n Open Trip Explore</p>
+                    </div>
+                    
+                    <div class="payment-card">
+                        <i class="fas fa-mobile-alt fa-4x" style="color:#4a235c;"></i>
+                        <h3>E-Wallet OVO</h3>
+                        <div class="account-details">
+                            <span id="ovo_hp">081385285889</span>
+                            <button class="copy-button" onclick="copyToClipboard('ovo_hp', this)">Salin</button>
+                        </div>
+                        <p style="font-weight: bold;">a.n Open Trip Explore</p>
+                    </div>
+
+                    <div class="payment-card">
+                        <i class="fas fa-shopping-bag fa-4x" style="color:#ee4d2d;"></i>
+                        <h3>E-Wallet ShopeePay</h3>
+                        <div class="account-details">
+                            <span id="shopeepay_hp">081385285889</span>
+                            <button class="copy-button" onclick="copyToClipboard('shopeepay_hp', this)">Salin</button>
+                        </div>
+                        <p style="font-weight: bold;">a.n Open Trip Explore</p>
+                    </div>
+
+                </div> <div style="text-align: center; margin-top: 50px; padding-top: 30px; border-top: 1px solid #eee;">
+                    <p style="font-size: 1.1em; color: var(--text-color); margin-bottom: 20px;">
+                        Setelah transfer, **WAJIB** kirim bukti pembayaran ke admin melalui WhatsApp untuk proses verifikasi.
+                    </p>
+                    <a href="https://wa.me/6281385285889" target="_blank" class="verification-button">
+                        <i class="fab fa-whatsapp"></i> Verifikasi ke Admin
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 OpenTrip Explore — Semua hak dilindungi.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/6281385285889?text=Halo%20Admin%20Open%20Trip%20Explore,%20saya%20mau%20bertanya%20mengenai%20paket%20trip." class="floating-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        function copyToClipboard(elementId, button) {
+            const textToCopy = document.getElementById(elementId).innerText;
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                button.innerText = 'Tersalin!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.innerText = 'Salin';
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Gagal menyalin:', err);
+                alert('Gagal menyalin teks. Silakan salin manual.');
+            });
+        }
+    </script>
+
+</body>
+</html>

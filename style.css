@@ -1,0 +1,534 @@
+/* ==== VARIABEL WARNA & FONT ==== */
+:root {
+    --primary-color: #008080; /* Hijau Tosca/Teal */
+    --secondary-color: #e0f2f1; /* Light Teal untuk section selang-seling */
+    --accent-color: #ffb300; /* Oranye/Amber untuk highlight */
+    --text-color: #333;
+    --light-text-color: #666;
+    --bg-light: #f9f9f9;
+    --bg-dark: #2c3e50; /* Dark untuk footer */
+    --whatsapp-color: #25D366;
+    --font-main: 'Poppins', sans-serif;
+}
+
+/* ==== RESET & GAYA UMUM ==== */
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+body {
+    font-family: var(--font-main);
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: color 0.3s;
+}
+a:hover {
+    color: var(--accent-color);
+}
+section {
+    padding: 80px 0;
+}
+section:nth-of-type(even) {
+    background-color: var(--bg-light);
+}
+
+/* Tambahan Gaya untuk T&C Link di Formulir */
+.t-and-c-link {
+    font-weight: 600;
+    text-decoration: underline;
+    color: var(--primary-color);
+}
+
+/* ==== JUDUL SECTION (SECTION TITLE) ==== */
+.section-title {
+    text-align: center; 
+    color: var(--primary-color); 
+    font-size: 2.5em; 
+    font-weight: 700; 
+    position: relative;
+    margin-bottom: 50px;
+}
+.section-title::after { 
+    content: ''; 
+    display: block; 
+    width: 60px; 
+    height: 4px; 
+    background-color: var(--accent-color); 
+    margin: 15px auto 0; 
+    border-radius: 2px; 
+}
+
+/* ==== HEADER & NAVIGASI ==== */
+header {
+    background: url('baground.jpg') no-repeat center center/cover;
+    color: white; 
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky; 
+    top: 0; 
+    z-index: 1000;
+    min-height: 60px; 
+    position: relative; 
+}
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 1;
+}
+nav {
+    position: relative; 
+    z-index: 2;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+nav li:first-child { 
+    margin-right: auto; 
+    font-weight: 700; 
+    font-size: 1.4em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+}
+nav li a {
+    color: white; 
+    padding: 10px 18px; 
+    border-radius: 5px; 
+    transition: background-color 0.3s, color 0.3s;
+}
+nav li a:hover { 
+    background-color: white; 
+    color: var(--primary-color); 
+}
+
+
+/* ==== HERO SECTION (KHUSUS INDEX.HTML) ==== */
+.hero { 
+    text-align: center; 
+    padding: 100px 20px; 
+    background: url('baground.jpg') no-repeat center center/cover;
+    color: white; 
+    position: relative; 
+    min-height: 60vh; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+    margin-top: -15px; 
+}
+.hero::before { 
+    content: ''; 
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
+    background-color: rgba(0,0,0,0.4); 
+    z-index: 1; 
+}
+.hero > * { z-index: 2; position: relative; }
+.hero h1 { font-size: 3.5em; margin-bottom: 20px; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+.hero p { font-size: 1.2em; max-width: 800px; margin: 0 auto 30px; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+
+
+/* ==== TRIP CARDS (index.html & daftar_trip.html) ==== */
+.trip-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+.trip-card {
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    overflow: hidden;
+    background-color: white;
+    transition: transform 0.3s ease;
+}
+.trip-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+.trip-card img {
+    width: 100%;
+    height: 200px; /* Tinggi gambar standar untuk kartu */
+    object-fit: cover;
+}
+.trip-card-content {
+    padding: 20px;
+    text-align: left; /* Defaultkan ke kiri untuk konten */
+}
+.trip-card-content h3 {
+    color: var(--primary-color);
+    margin-bottom: 5px;
+    font-size: 1.2em;
+}
+.trip-card-content p {
+    color: var(--light-text-color);
+    font-size: 0.9em;
+    margin-bottom: 15px;
+}
+
+/* ENHANCED TRIP CARD INFO */
+.trip-info-icons {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-top: 1px solid #eee;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+.trip-info-icons span {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+.trip-info-icons i {
+    margin-right: 5px;
+    color: var(--accent-color);
+}
+
+.trip-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+.trip-price {
+    font-size: 1.4em; 
+    font-weight: 700; 
+    color: var(--accent-color);
+}
+
+
+/* ==== KONTEN PEMBAYARAN (pembayaran.html) ==== */
+.payment-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    padding: 50px 0;
+    justify-items: center;
+}
+.payment-card {
+    background-color: #ffffff;
+    border: 1px solid #eee;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    padding: 25px;
+    width: 100%;
+    max-width: 280px;
+    transition: all 0.3s ease;
+}
+.payment-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Perbaikan untuk menghilangkan gambar dan mengganti dengan ikon */
+.payment-card img {
+    display: none; 
+}
+.payment-card i.fa-4x {
+    display: block;
+    font-size: 3em;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.payment-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 8px;
+}
+.account-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.payment-card p {
+    font-size: 0.95em;
+    line-height: 1.5;
+    color: #444;
+}
+
+/* Style Tombol Salin */
+.copy-button {
+    background-color: #f0f0f0;
+    color: var(--text-color);
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    font-size: 0.85em;
+    margin-left: 10px;
+}
+.copy-button:hover {
+    background-color: #ddd;
+    transform: scale(1.05);
+}
+.copied {
+    background-color: #28a745;
+    color: white;
+}
+
+
+/* ==== VERIFIKASI WA BUTTON & GENERAL BUTTONS ==== */
+.verification-button, .contact-button {
+    background-color: var(--whatsapp-color); 
+    color: white; 
+    padding: 12px 25px; 
+    border-radius: 50px; 
+    text-decoration: none; 
+    font-weight: bold; 
+    display: inline-flex; 
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(37, 211, 102, 0.4);
+    transition: background-color 0.3s, transform 0.3s;
+    border: none;
+    cursor: pointer;
+}
+.verification-button:hover, .contact-button:hover {
+    background-color: #1DA851;
+    transform: translateY(-2px);
+    color: white; /* Pastikan teks tetap putih saat hover */
+}
+.contact-button {
+    padding: 8px 15px;
+    font-size: 0.9em;
+    box-shadow: none;
+}
+.verification-button i, .contact-button i {
+    margin-right: 8px;
+}
+
+
+/* ==== FLOATING WHATSAPP BUTTON ==== */
+.floating-whatsapp {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 25px;
+    right: 25px;
+    background-color: var(--whatsapp-color);
+    color: #fff;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.3);
+    z-index: 1500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+.floating-whatsapp:hover {
+    color: white;
+    transform: scale(1.1);
+}
+
+
+/* ==== KONTEN KONTAK (kontak.html) ==== */
+.contact-list {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 25px;
+    max-width: 900px;
+    margin: 0 auto 50px;
+}
+.contact-item {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 250px; 
+}
+.contact-item h3 {
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+.contact-item p {
+    color: var(--light-text-color);
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.contact-item .contact-button {
+    background-color: var(--whatsapp-color);
+    color: white;
+    padding: 8px 20px;
+    font-weight: 600;
+    width: 100%;
+    justify-content: center;
+}
+.contact-item .contact-button i {
+    margin-right: 5px;
+}
+
+/* ==== GAYA FORMULIR PEMESANAN (booking_form.html) ==== */
+.booking-wrapper {
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+.booking-form h2 {
+    color: var(--primary-color);
+    margin-top: 25px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 5px;
+}
+.form-instruction {
+    font-style: italic;
+    color: var(--light-text-color);
+    margin-bottom: 30px;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+.form-group input:focus, .form-group select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 128, 128, 0.3);
+}
+.disclaimer-box {
+    border: 1px solid #f0ad4e;
+    background-color: #fff9e6;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+}
+.disclaimer-box ul {
+    list-style: disc;
+    margin-left: 20px;
+    margin-top: 10px;
+    color: #444;
+}
+.disclaimer-box li {
+    margin-bottom: 5px;
+    font-size: 0.95em;
+}
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.checkbox-group input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+.form-note {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: var(--light-text-color);
+}
+.confirmation-message {
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 2px solid var(--whatsapp-color);
+    background-color: #e6ffe6;
+    color: #1a7a2e;
+    border-radius: 10px;
+    font-weight: 600;
+    display: none; /* Awalnya disembunyikan */
+}
+
+
+/* ==== FOOTER ==== */
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: var(--bg-dark); 
+    font-size: 0.9em;
+    color: #aaa;
+}
+footer a {
+    color: white; 
+}
+footer a:hover {
+    color: var(--accent-color);
+}
+
+/* ==== MEDIA QUERIES (Responsif) ==== */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2em;
+    }
+    .hero {
+        min-height: 40vh;
+        padding: 50px 20px;
+    }
+    .hero h1 {
+        font-size: 2em;
+    }
+    .hero p {
+        font-size: 1em;
+    }
+    nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    nav li:first-child { 
+        margin-right: 0; 
+        margin-bottom: 10px; 
+    }
+    nav li a { 
+        padding: 8px 15px; 
+        width: 100%; 
+        text-align: left; 
+    }
+    .trip-grid, .payment-container {
+        padding: 30px 0;
+        grid-template-columns: 1fr;
+    }
+    .contact-list {
+        flex-direction: column;
+        align-items: center;
+    }
+    .contact-item {
+        max-width: 90%;
+    }
+}

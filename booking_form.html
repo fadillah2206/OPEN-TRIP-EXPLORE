@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Pemesanan Trip - OpenTrip Explore</title>
+    <meta name="description" content="Isi formulir ini untuk memesan paket Open Trip Anda. Pilih destinasi, tanggal, dan admin untuk konfirmasi melalui WhatsApp.">
+    <meta name="keywords" content="formulir booking, pesan trip online, booking open trip, formulir whatsapp">
+
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body onload="prefillTripFromURL()"> 
+    
+    <header>
+        <div class="container">
+            <nav>
+                <ul>
+                    <li><a href="index.html">OPEN TRIP EXPLORE</a></li>
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="pembayaran.html">Metode Pembayaran</a></li>
+                    <li><a href="kontak.html">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <div class="container">
+                
+                <h1 class="section-title">Formulir Pemesanan & Data Diri</h1>
+                
+                <div class="booking-wrapper">
+                    
+                    <div id="confirmationMessage" class="confirmation-message">
+                        <p>✅ Data Anda berhasil disiapkan! Tekan tombol "Kirim" di aplikasi WhatsApp untuk menyelesaikan pemesanan.</p>
+                    </div>
+
+                    <form id="bookingForm" onsubmit="sendWhatsApp(event)" class="booking-form">
+                        
+                        <h2>Data Peserta Trip</h2>
+                        <p class="form-instruction">Mohon isi data diri Anda (ketua rombongan) dengan lengkap dan benar.</p>
+                        
+                        <div class="form-group">
+                            <label for="nama">Nama Lengkap (Ketua Rombongan)*</label>
+                            <input type="text" id="nama" name="nama" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="wa">Nomor WhatsApp Aktif*</label>
+                            <input type="tel" id="wa" name="wa" required placeholder="Contoh: 081234567890">
+                        </div>
+                        <div class="form-group">
+                            <label for="trip">Pilihan Paket Trip*</label>
+                            <select id="trip" name="trip" required>
+                                <option value="" disabled selected>-- Pilih Trip --</option>
+                                <option value="Gunung Gede Pangrango">Gunung Gede Pangrango</option>
+                                <option value="Curug Panjang">Curug Panjang</option>
+                                <option value="Gunung Sagara">Gunung Sagara</option>
+                                <option value="Bukit Kuta">Bukit Kuta</option>
+                                <option value="Kebun Teh Puncak">Kebun Teh Puncak</option>
+                                <option value="Pantai Sawarna">Pantai Sawarna</option>
+                                <option value="Pantai Ujung Genteng">Pantai Ujung Genteng</option>
+                                <option value="Kawah Ratu Gunung Salak">Kawah Ratu Gunung Salak</option>
+                                <option value="Kawah Putih">Kawah Putih Ciwidey</option>
+                                <option value="Situ Patenggang">Situ Patenggang</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="jumlah_peserta">Jumlah Peserta (Termasuk Anda)*</label>
+                            <input type="number" id="jumlah_peserta" name="jumlah_peserta" min="1" value="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tanggal">Tanggal Keberangkatan yang Diinginkan*</label>
+                            <input type="date" id="tanggal" name="tanggal" required>
+                        </div>
+
+                        <hr>
+
+                        <div class="form-group">
+                            <label for="admin_tujuan">Pilih Admin Tujuan Konfirmasi*</label>
+                            <select id="admin_tujuan" name="admin_tujuan" required>
+                                <option value="" disabled selected>-- Pilih Admin --</option>
+                                <option value="6281385285889">Ahmad Fadillah (Admin Utama)</option>
+                                <option value="6283896420256">Abu Bakar Riziq</option>
+                                <option value="6282258722610">Defry Sulaeman</option>
+                                <option value="62895412119400">Fahmi Firmansyah</option>
+                                <option value="6288214618766">Gumilang Ali Prayogi</option>
+                                <option value="6287877080144">Muhammad Reza Prasetya</option>
+                            </select>
+                        </div>
+                        <hr>
+                        
+                        <h2>Persetujuan dan Tanggung Jawab</h2>
+                        
+                        <div class="disclaimer-box">
+                            <p>Dengan menekan tombol kirim, Anda menyatakan:</p>
+                            <ul>
+                                <li>**Bertanggung Jawab** penuh atas barang bawaan, kesehatan, dan keselamatan diri sendiri serta rombongan.</li>
+                                <li>**Siap Menjaga Kebersihan** di setiap destinasi wisata.</li>
+                                <li>Telah membaca dan menyetujui **Syarat & Ketentuan** Open Trip Explore.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="setuju" name="setuju" required>
+                            <label for="setuju">Saya setuju dengan semua <a href="syarat_ketentuan.html" target="_blank" class="t-and-c-link">Syarat dan Ketentuan</a> di atas.</label>
+                        </div>
+
+                        <button type="submit" class="verification-button" id="submitButton" style="width: 100%;">
+                            <i class="fab fa-whatsapp"></i> Kirim Data & Lanjut ke Konfirmasi Admin
+                        </button>
+                        
+                        <p class="form-note">Data akan dikirimkan melalui WhatsApp ke admin yang Anda pilih untuk proses konfirmasi dan pembayaran.</p>
+
+                    </form>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 OpenTrip Explore — Semua hak dilindungi.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/6281385285889?text=Halo%20Admin%20Open%20Trip%20Explore,%20saya%20mau%20bertanya%20mengenai%20paket%20trip." class="floating-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Fungsi untuk pre-fill pilihan trip dari parameter URL
+        function prefillTripFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const tripName = urlParams.get('trip');
+            const tripSelect = document.getElementById('trip');
+
+            if (tripName) {
+                // Mencari opsi yang cocok dengan nama trip dari URL
+                for (let i = 0; i < tripSelect.options.length; i++) {
+                    if (tripSelect.options[i].value === tripName) {
+                        tripSelect.value = tripName;
+                        return;
+                    }
+                }
+            }
+        }
+
+        // Fungsi untuk mengirim data ke WhatsApp (dengan konfirmasi visual)
+        function sendWhatsApp(event) {
+            event.preventDefault(); 
+            
+            const nama = document.getElementById('nama').value;
+            const wa = document.getElementById('wa').value;
+            const trip = document.getElementById('trip').value;
+            const jumlah_peserta = document.getElementById('jumlah_peserta').value;
+            const tanggal = document.getElementById('tanggal').value;
+            const adminWA = document.getElementById('admin_tujuan').value; 
+            const setuju = document.getElementById('setuju').checked;
+            const confMsg = document.getElementById('confirmationMessage');
+
+            if (!setuju || adminWA === "") {
+                if (!setuju) {
+                    alert("Anda harus menyetujui Syarat dan Ketentuan.");
+                } else if (adminWA === "") {
+                    alert("Anda harus memilih Admin Tujuan Konfirmasi.");
+                }
+                return;
+            }
+
+            // 1. Tampilkan pesan konfirmasi visual
+            confMsg.style.display = 'block';
+
+            // 2. Format pesan WhatsApp
+            const message = `
+*--- Formulir Pemesanan Open Trip ---*
+
+Halo Admin, saya ingin melakukan pemesanan trip. Berikut data saya:
+
+*Nama Ketua Rombongan:* ${nama}
+*No. WhatsApp (Aktif):* ${wa}
+*Paket Trip Pilihan:* ${trip}
+*Tanggal Keberangkatan:* ${tanggal}
+*Jumlah Peserta:* ${jumlah_peserta} orang
+
+Mohon dikirimkan rincian biaya dan panduan pembayaran. Terima kasih.
+            `.trim(); 
+
+            const whatsappURL = `https://wa.me/${adminWA}?text=${encodeURIComponent(message)}`;
+
+            // 3. Arahkan pengguna ke WhatsApp setelah jeda singkat (agar pesan visual terlihat)
+            setTimeout(() => {
+                window.open(whatsappURL, '_blank');
+                // Sembunyikan pesan setelah redirect
+                confMsg.style.display = 'none'; 
+            }, 1000); 
+        }
+    </script>
+
+</body>
+</html>
