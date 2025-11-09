@@ -11,7 +11,87 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Gaya tambahan dari style.css dimuat, tidak perlu diulang */
+        /* CSS Tambahan untuk Kartu yang Dapat Diklik */
+        .payment-link {
+            text-decoration: none;
+            color: inherit;
+            display: block; 
+        }
+        .payment-card {
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .payment-link:hover .payment-card {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
+        }
+        
+        /* CSS untuk Modal (Digunakan untuk Bank & E-Wallet) */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7); 
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation: fadeIn 0.3s;
+        }
+        .modal-content img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            margin: 20px auto;
+            display: block;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            line-height: 1;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: #333;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        #bank-number-display {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+            margin: 15px 0;
+            padding: 10px;
+            background-color: var(--secondary-color);
+            border-radius: 5px;
+            border: 1px solid var(--primary-color);
+        }
+        @keyframes fadeIn {
+            from {opacity: 0; transform: scale(0.95);}
+            to {opacity: 1; transform: scale(1);}
+        }
     </style>
 </head>
 <body>
@@ -35,74 +115,89 @@
                 <h1 class="section-title">Metode Pembayaran</h1>
                 
                 <p style="text-align: center; max-width: 700px; margin: 0 auto 50px; color: var(--light-text-color);">
-                    Kami menyediakan berbagai metode pembayaran yang mudah dan aman. Salin nomor rekening atau e-wallet yang Anda pilih.
+                    Klik kartu Bank untuk melihat Virtual Account, atau klik kartu E-Wallet untuk menampilkan QR Code pembayaran.
                 </p>
 
                 <div class="payment-container">
 
-                    <div class="payment-card">
-                        <i class="fas fa-university fa-4x" style="color:#00407d;"></i>
-                        <h3>Transfer Bank BCA</h3>
-                        <div class="account-details">
-                            <span id="rekening_bca">1234567890</span>
-                            <button class="copy-button" onclick="copyToClipboard('rekening_bca', this)">Salin</button>
+                    <a href="#" class="payment-link" onclick="openBankModal('bca'); return false;">
+                        <div class="payment-card">
+                            <i class="fas fa-university fa-4x" style="color:#00407d;"></i>
+                            <h3>Virtual Account BCA</h3>
+                            <div class="account-details">
+                                <span id="rekening_bca">78800120251109</span>
+                                <button class="copy-button" onclick="copyText('78800120251109', event, this)">Salin</button> 
+                            </div>
+                            <p style="font-weight: bold;">a.n PT Open Trip Explore</p>
                         </div>
-                        <p style="font-weight: bold;">a.n PT Open Trip Explore</p>
-                    </div>
+                    </a>
                     
-                    <div class="payment-card">
-                        <i class="fas fa-university fa-4x" style="color:#01539e;"></i>
-                        <h3>Transfer Bank BRI</h3>
-                        <div class="account-details">
-                            <span id="rekening_bri">9876543210</span>
-                            <button class="copy-button" onclick="copyToClipboard('rekening_bri', this)">Salin</button>
+                    <a href="#" class="payment-link" onclick="openBankModal('bri'); return false;">
+                        <div class="payment-card">
+                            <i class="fas fa-university fa-4x" style="color:#01539e;"></i>
+                            <h3>Virtual Account BRI</h3>
+                            <div class="account-details">
+                                <span id="rekening_bri">888820251109</span>
+                                <button class="copy-button" onclick="copyText('888820251109', event, this)">Salin</button>
+                            </div>
+                            <p style="font-weight: bold;">a.n PT Open Trip Explore</p>
                         </div>
-                        <p style="font-weight: bold;">a.n PT Open Trip Explore</p>
-                    </div>
+                    </a>
 
-                    <div class="payment-card">
-                        <i class="fas fa-university fa-4x" style="color:#e2001a;"></i>
-                        <h3>Transfer Bank OCBC</h3>
-                        <div class="account-details">
-                            <span id="rekening_ocbc">1122334455</span>
-                            <button class="copy-button" onclick="copyToClipboard('rekening_ocbc', this)">Salin</button>
+                    <a href="#" class="payment-link" onclick="openBankModal('ocbc'); return false;">
+                        <div class="payment-card">
+                            <i class="fas fa-university fa-4x" style="color:#e2001a;"></i>
+                            <h3>Virtual Account OCBC</h3>
+                            <div class="account-details">
+                                <span id="rekening_ocbc">809020251109</span>
+                                <button class="copy-button" onclick="copyText('809020251109', event, this)">Salin</button>
+                            </div>
+                            <p style="font-weight: bold;">a.n PT Open Trip Explore</p>
                         </div>
-                        <p style="font-weight: bold;">a.n PT Open Trip Explore</p>
-                    </div>
+                    </a>
 
-                    <div class="payment-card">
-                        <i class="fas fa-wallet fa-4x" style="color:#1da7f2;"></i>
-                        <h3>E-Wallet DANA</h3>
-                        <div class="account-details">
-                            <span id="dana_hp">081385285889</span>
-                            <button class="copy-button" onclick="copyToClipboard('dana_hp', this)">Salin</button>
+                    <a href="#" class="payment-link" onclick="openQRModal('dana'); return false;">
+                        <div class="payment-card">
+                            <i class="fas fa-wallet fa-4x" style="color:#1da7f2;"></i>
+                            <h3>E-Wallet DANA</h3>
+                            <div class="account-details">
+                                <span id="dana_hp">0895412119400</span>
+                                <button class="copy-button" onclick="copyText('0895412119400', event, this)">Salin</button>
+                            </div>
+                            <p style="font-weight: bold;">a.n Fahmi Firmansyah</p>
                         </div>
-                        <p style="font-weight: bold;">a.n Open Trip Explore</p>
-                    </div>
+                    </a>
                     
-                    <div class="payment-card">
-                        <i class="fas fa-mobile-alt fa-4x" style="color:#4a235c;"></i>
-                        <h3>E-Wallet OVO</h3>
-                        <div class="account-details">
-                            <span id="ovo_hp">081385285889</span>
-                            <button class="copy-button" onclick="copyToClipboard('ovo_hp', this)">Salin</button>
+                    <a href="#" class="payment-link" onclick="openQRModal('ovo'); return false;">
+                        <div class="payment-card">
+                            <i class="fas fa-mobile-alt fa-4x" style="color:#4a235c;"></i>
+                            <h3>E-Wallet OVO</h3>
+                            <div class="account-details">
+                                <span id="ovo_hp">083896420256</span>
+                                <button class="copy-button" onclick="copyText('083896420256', event, this)">Salin</button>
+                            </div>
+                            <p style="font-weight: bold;">a.n Abu Bakar Riziq</p>
                         </div>
-                        <p style="font-weight: bold;">a.n Open Trip Explore</p>
-                    </div>
+                    </a>
 
-                    <div class="payment-card">
-                        <i class="fas fa-shopping-bag fa-4x" style="color:#ee4d2d;"></i>
-                        <h3>E-Wallet ShopeePay</h3>
-                        <div class="account-details">
-                            <span id="shopeepay_hp">081385285889</span>
-                            <button class="copy-button" onclick="copyToClipboard('shopeepay_hp', this)">Salin</button>
+                    <a href="#" class="payment-link" onclick="openQRModal('shopeepay'); return false;">
+                        <div class="payment-card">
+                            <i class="fas fa-shopping-bag fa-4x" style="color:#ee4d2d;"></i>
+                            <h3>E-Wallet ShopeePay</h3>
+                            <div class="account-details">
+                                <span id="shopeepay_hp">082258722610</span>
+                                <button class="copy-button" onclick="copyText('082258722610', event, this)">Salin</button>
+                            </div>
+                            <p style="font-weight: bold;">a.n Defry Sulaeman</p>
                         </div>
-                        <p style="font-weight: bold;">a.n Open Trip Explore</p>
-                    </div>
+                    </a>
 
-                </div> <div style="text-align: center; margin-top: 50px; padding-top: 30px; border-top: 1px solid #eee;">
+                </div> 
+                
+                <div style="text-align: center; margin-top: 50px; padding-top: 30px; border-top: 1px solid #eee;" id="konfirmasi-pembayaran">
+                    <h2 class="section-title">Konfirmasi Pembayaran</h2>
                     <p style="font-size: 1.1em; color: var(--text-color); margin-bottom: 20px;">
-                        Setelah transfer, **WAJIB** kirim bukti pembayaran ke admin melalui WhatsApp untuk proses verifikasi.
+                        Setelah transfer (via Virtual Account atau E-Wallet), **WAJIB** kirim bukti pembayaran ke admin melalui WhatsApp untuk proses verifikasi.
                     </p>
                     <a href="https://wa.me/6281385285889" target="_blank" class="verification-button">
                         <i class="fab fa-whatsapp"></i> Verifikasi ke Admin
@@ -123,22 +218,116 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <div id="bankModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeBankModal()">&times;</span>
+            <h2 id="bank-modal-title"></h2>
+            
+            <p style="font-weight: 600;">Nomor Virtual Account:</p>
+            <span id="bank-number-display"></span>
+            <p style="font-size: 1.1em; font-weight: 600;" id="bank-name-display"></p>
+            
+            <button id="bank-copy-button" class="verification-button" style="width: 100%; margin-top: 20px; background-color: #00407d;">
+                <i class="fas fa-copy"></i> Salin Nomor VA
+            </button>
+
+            <p style="margin-top: 30px; font-size: 0.9em; color: var(--light-text-color);">
+                Setelah menyalin dan melakukan transfer melalui m-Banking Anda, lanjutkan ke verifikasi.
+            </p>
+            <a href="https://wa.me/6281385285889" target="_blank" class="verification-button" style="margin-top: 10px;">
+                <i class="fab fa-whatsapp"></i> Lanjut Verifikasi Admin
+            </a>
+        </div>
+    </div>
+    
+    <div id="qrModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeQRModal()">&times;</span>
+            <h2 id="qr-modal-title"></h2>
+            
+            <p style="color: #e2001a; font-weight: bold; margin-bottom: 5px; font-size: 0.9em;">*Pastikan nama penerima sudah benar*</p>
+            <img id="qr-image" src="images/scan.jpg" alt="QR Code Pembayaran">
+            
+            <p style="font-size: 1.1em; font-weight: 600;" id="qr-name"></p>
+            <p id="qr-number"></p>
+            
+            <p style="margin-top: 20px;">
+                Setelah pembayaran berhasil, segera klik tombol di bawah untuk verifikasi.
+            </p>
+            <a href="https://wa.me/6281385285889" target="_blank" class="verification-button">
+                <i class="fab fa-whatsapp"></i> Lanjut Verifikasi Admin
+            </a>
+        </div>
+    </div>
+
     <script>
-        function copyToClipboard(elementId, button) {
-            const textToCopy = document.getElementById(elementId).innerText;
+        // Data E-Wallet (QR_IMAGE sekarang mengarah ke 'images/scan.jpg' untuk semua)
+        const walletData = {
+            'dana': { name: 'Fahmi Firmansyah', number: '0895412119400', qr_image: 'images/scan.jpg' },
+            'ovo': { name: 'Abu Bakar Riziq', number: '083896420256', qr_image: 'images/scan.jpg' },
+            'shopeepay': { name: 'Defry Sulaeman', number: '082258722610', qr_image: 'images/scan.jpg' }
+        };
+        
+        // Data Bank (TIDAK BERUBAH dari sebelumnya)
+        const bankData = {
+            'bca': { name: 'PT Open Trip Explore', number: '78800120251109', bank: 'BCA' },
+            'bri': { name: 'PT Open Trip Explore', number: '888820251109', bank: 'BRI' },
+            'ocbc': { name: 'PT Open Trip Explore', number: '809020251109', bank: 'OCBC' }
+        };
+
+        // --- FUNGSI UTAMA ---
+
+        // Fungsi Salin Teks yang Fleksibel
+        function copyText(textToCopy, event, button) {
+            event.stopPropagation();
             
             navigator.clipboard.writeText(textToCopy).then(() => {
+                const originalText = button.innerText;
                 button.innerText = 'Tersalin!';
                 button.classList.add('copied');
                 
                 setTimeout(() => {
-                    button.innerText = 'Salin';
+                    button.innerText = originalText;
                     button.classList.remove('copied');
                 }, 2000);
             }).catch(err => {
                 console.error('Gagal menyalin:', err);
                 alert('Gagal menyalin teks. Silakan salin manual.');
             });
+        }
+
+        // --- FUNGSI MODAL BANK ---
+        function openBankModal(bankType) {
+            const data = bankData[bankType];
+            
+            document.getElementById('bank-modal-title').innerText = `Virtual Account ${data.bank}`;
+            document.getElementById('bank-number-display').innerText = data.number;
+            document.getElementById('bank-name-display').innerText = `a.n ${data.name}`;
+            
+            document.getElementById('bank-copy-button').onclick = (event) => {
+                copyText(data.number, event, document.getElementById('bank-copy-button'));
+            };
+
+            document.getElementById('bankModal').style.display = 'flex';
+        }
+        function closeBankModal() {
+            document.getElementById('bankModal').style.display = 'none';
+        }
+
+        // --- FUNGSI MODAL QR CODE E-WALLET ---
+        function openQRModal(walletType) {
+            const data = walletData[walletType];
+            
+            document.getElementById('qr-modal-title').innerText = `Pembayaran E-Wallet ${walletType.toUpperCase()}`;
+            // Menggunakan 'images/scan.jpg' untuk semua E-Wallet
+            document.getElementById('qr-image').src = data.qr_image; 
+            document.getElementById('qr-name').innerText = `a.n ${data.name}`;
+            document.getElementById('qr-number').innerText = `Nomor HP: ${data.number}`;
+            
+            document.getElementById('qrModal').style.display = 'flex';
+        }
+        function closeQRModal() {
+            document.getElementById('qrModal').style.display = 'none';
         }
     </script>
 
